@@ -6,7 +6,10 @@ const path = require('path')
 
 let outputFolder = path.relative(process.cwd(), 'output')
 const inputFile = argv.input
+const willZipp = argv.zip
+
 if(argv.output) outputFolder =  path.relative(process.cwd(), argv.output)
+
 if(!inputFile){
     console.log(' You need to give an input file to convert\n For example: npx udt-labelme-converter --input=my-precious-samples.json --output=where-i-want-to-see-my-output-files')
 }else{
@@ -27,7 +30,8 @@ if(!inputFile){
     if(isThereSamples && !isThereShapes && !isThereVersion && !isThereFlags && (!isThereImagePath || !isThereImageData) && !isThereImageHeight && !isThereImageWidth){
         udt2Labelme({
             inputFile: jsonFile,
-            outputFolder
+            outputFolder,
+            willZipp
         })
     }else if(isThereSamples){
         console.log("We're working on labelme conversion")
